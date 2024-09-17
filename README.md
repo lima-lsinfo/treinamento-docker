@@ -1,1 +1,0 @@
-# treinamento-docker
