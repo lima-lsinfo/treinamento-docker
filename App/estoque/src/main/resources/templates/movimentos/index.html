@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <!-- É possível adicionar conteúdo -->
+</head>
+
+    <th:block layout:fragment="pagetitle">
+        <div th:replace="~{partials/title-meta :: title-meta('Movimentos')}"></div>
+    </th:block>
+
+    <th:block layout:fragment="conteudo">
+        
+        <div th:replace="~{partials/page-title :: page-title('Movimentações de Estoque','Movimentações')}"> </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <div class="d-sm-flex flex-wrap">
+                                            <h4 class="card-title mb-4">Registros de Movimentos</h4>
+                                            <div class="ms-auto">
+                                                <a th:href="@{/movimentos/novo}" type="button" class="btn btn-primary btn-sm">
+                                                    <i class="mdi mdi-plus me-1"></i> Adicionar
+                                                </a>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <table id="datatable" class="table table-bordered table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th class="coluna-id">Id</th>
+                                                    <th>Data</th>
+                                                    <th>Tipo</th>
+                                                    <th>Material</th>
+                                                    <th>Quantidade</th>
+                                                    <th>Responsável</th>
+                                                    <th class="text-center coluna-acoes">Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="movimento : ${movimentosList}">
+                                                    <td th:text="${movimento.id}"></td>
+                                                    <td th:text="${#temporals.format(movimento.data, 'dd/MM/yyyy')}"></td>
+                                                    <td th:text="${movimento.tipo}"></td>
+                                                    <td th:text="${movimento.material.nome}"></td>
+                                                    <td th:text="${movimento.quantidade}"></td>
+                                                    <td th:text="${movimento.responsavel}"></td>
+                                                    <td class="text-center">
+                                                        <a th:href="|javascript:editar(${movimento.id});|" class="btn btn-primary btn-sm">
+                                                            <i class="mdi mdi-pencil me-1"></i> Editar
+                                                        </a>
+                                                        
+                                                        <a th:href="|javascript:excluir(${movimento.id});|" class="btn btn-danger btn-sm">
+                                                            <i class="mdi mdi-delete me-1"></i> Excluir
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+        
+                                        </table>
+        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+
+    </th:block>
+
+    <th:block layout:fragment="pageJs">
+
+    <script th:src="@{/pages/movimentos.js}"></script>
+
+    </th:block>
+        
+
+</html>

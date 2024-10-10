@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <!-- É possível adicionar conteúdo -->
+</head>
+
+    <th:block layout:fragment="pagetitle">
+        <div th:replace="~{partials/title-meta :: title-meta('Categorias')}"></div>
+    </th:block>
+
+    <th:block layout:fragment="conteudo">
+        
+        <div th:replace="~{partials/page-title :: page-title('Categorias','Cadastro')}"> </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+        
+                                        <div class="d-sm-flex flex-wrap">
+                                            <h4 class="card-title mb-4">Categorias</h4>
+                                            <div class="ms-auto">
+                                                <button type="button" id="btn-adicionar" class="btn btn-primary btn-sm">
+                                                    <i class="mdi mdi-plus me-1"></i> Adicionar
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <table id="datatable" class="table table-bordered table-striped dt-responsive nowrap w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th class="coluna-id">Id</th>
+                                                    <th>Nome</th>
+                                                    <th>Situação</th>
+                                                    <th class="text-center coluna-acoes">Ações</th>
+
+                                                </tr>
+                                            </thead>
+        
+                                        </table>
+        
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                        
+                        <div class="modal fade" id="modal-categoria" tabindex="-1" style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="titulo-modal">Titulo Modal</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="corpo-modal">
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" id="btn-salvar" class="btn btn-primary">Salvar</button>                                        
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cancelar</button>                                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+    </th:block>
+
+    <th:block layout:fragment="pageJs">        
+        <script th:src="@{/pages/categorias.js}"></script>
+    </th:block>
+        
+</html>

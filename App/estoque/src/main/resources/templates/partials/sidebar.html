@@ -1,0 +1,30 @@
+<th:block th:fragment="sidebar">
+        <div class="vertical-menu">
+            <div data-simplebar class="h-100">
+                <div id="sidebar-menu">
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li class="menu-title" key="t-menu">Menu</li>
+
+                        <li th:classappend="${menu=='cadastro' ? 'mm-active' : ''}">
+                            <a href="javascript:void(0);" class="has-arrow waves-effect">
+                                <i class="fas fa-folder-open"></i>
+                                <span key="t-dashboards">Cadastro</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li th:classappend="${submenu=='fornecedores' ? 'mm-active' : ''}"><a th:href="@{/fornecedores}" key="t-default">Fornecedores</a></li>
+                                <li><a th:href="@{/categorias}" key="t-saas">Categorias</a></li>
+                                <li><a th:href="@{/materiais}" key="t-crypto">Materiais</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a th:href="@{/movimentos}" class="waves-effect">
+                                <i class="fas fa-cube"></i>
+                                <span>Movimentações</span>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+</th:block>

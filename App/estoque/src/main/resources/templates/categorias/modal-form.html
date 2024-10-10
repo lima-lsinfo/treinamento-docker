@@ -1,0 +1,27 @@
+<form id="formulario" th:object="${categoria}" onkeydown="return event.key !== 'Enter';">
+                                        
+    <input type="hidden" th:field="*{id}">
+
+    <div class="row">
+    
+        <div class="col-md-8 mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" th:field="*{nome}" th:errorclass="is-invalid" class="form-control" id="nome" placeholder="Informe o nome da empresa">
+            <span class="error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+        </div>
+
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label for="situacao" class="form-label">Situação</label>
+                <select th:field="*{situacao}" id="situacao" th:errorclass="is-invalid" class="form-select">
+                    <option th:value="''">Selecione ...</option>
+                    <option th:value="'Ativo'">Ativo</option>
+                    <option th:value="'Inativo'">Inativo</option>
+                </select>
+                <span class="error" th:if="${#fields.hasErrors('situacao')}" th:errors="*{situacao}"></span>
+            </div>
+        </div>
+
+    </div>                            
+    
+</form>

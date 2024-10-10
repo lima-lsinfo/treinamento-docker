@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}" th:with="menu='cadastro', submenu='fornecedores'">
+<head>
+    <!-- É possível adicionar conteúdo -->
+</head>
+
+    <th:block layout:fragment="pagetitle">
+        <div th:replace="~{partials/title-meta :: title-meta('Fornecedores')}"></div>
+    </th:block>
+
+    <th:block layout:fragment="conteudo">
+        
+        <div th:replace="~{partials/page-title :: page-title('Fornecedores','Cadastro')}"> </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+    
+                                    <h4 class="card-title mb-4">
+                                        <span th:if="${fornecedor.id==null}">Adicionar Fornecedor</span>
+                                        <span th:unless="${fornecedor.id==null}">Editar Fornecedor</span>
+                                    </h4>
+
+                                    <form th:action="@{/fornecedores/salvar}" method="post" th:object="${fornecedor}">
+                                        
+                                        <input type="hidden" th:field="*{id}">
+
+                                        <div class="row">
+                                        
+                                            <div class="col-md-9 mb-3">
+                                                <label for="nome" class="form-label">Nome</label>
+                                                <input type="text" th:field="*{nome}" th:errorclass="is-invalid" class="form-control" id="nome" placeholder="Informe o nome da empresa">
+                                                <span class="error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                                            </div>
+
+                                            <div class="col-md-3 mb-3">
+                                                <label for="cnpj" class="form-label">CNPJ</label>
+                                                <input type="text" th:field="*{cnpj}" th:errorclass="is-invalid" class="form-control" id="cnpj">
+                                                <span class="error" th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}"></span>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            
+                                            <div class="col-md-3">
+                                                <div class="mb-3">
+                                                    <label for="contato" class="form-label">Contato</label>
+                                                    <input type="text" id="contato" th:field="*{contato}" th:errorclass="is-invalid" class="form-control" placeholder="Informe o nome do contato">
+                                                    <span class="error" th:if="${#fields.hasErrors('contato')}" th:errors="*{contato}"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email</label>
+                                                    <input type="email" th:field="*{email}" th:errorclass="is-invalid" class="form-control" id="email" placeholder="Informe um e-mail válido">
+                                                    <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-2">
+                                                <div class="mb-3">
+                                                    <label for="telefone" class="form-label">Telefone</label>
+                                                    <input type="text" th:field="*{telefone}" class="form-control" id="telefone" placeholder="">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="mb-3">
+                                                    <label for="situacao" class="form-label">Situação</label>
+                                                    <select th:field="*{situacao}" id="situacao" th:errorclass="is-invalid" class="form-select">
+                                                        <option th:value="''">Selecione ...</option>
+                                                        <option th:value="'Ativo'">Ativo</option>
+                                                        <option th:value="'Inativo'">Inativo</option>
+                                                    </select>
+                                                    <span class="error" th:if="${#fields.hasErrors('situacao')}" th:errors="*{situacao}"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div>
+                                            <button type="submit" class="btn btn-primary w-md"> <i class="fas fa-save"></i> Salvar</button>
+                                            <button onclick="javascript:history.back(-1);" type="button" class="btn btn-secondary w-md">
+                                                <i class="fas fa-times"></i> Cancelar
+                                            </button>
+                                        </div>
+                                        
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+                    </div> <!-- end row -->
+
+    </th:block>
+
+    <th:block layout:fragment="pageJs">
+
+    </th:block>
+        
+
+</html>

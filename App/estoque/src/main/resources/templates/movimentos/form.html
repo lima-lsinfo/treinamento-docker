@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+    <!-- É possível adicionar conteúdo -->
+</head>
+
+    <th:block layout:fragment="pagetitle">
+        <div th:replace="~{partials/title-meta :: title-meta('Movimentação')}"></div>
+    </th:block>
+
+    <th:block layout:fragment="conteudo">
+        
+        <div th:replace="~{partials/page-title :: page-title('Movimentação','Movimentos')}"> </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            
+                            <div th:if="${erro}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                Verifique se os campos obrigatórios foram preenchidos corretamente.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            
+                            <div th:if="${mensagem!=null}" class="alert alert-success alert-dismissible fade show" role="alert">
+                                [[${mensagem}]]
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+    
+                                    <h4 class="card-title mb-4">Realizar Movimentação</h4>
+
+                                    <form th:action="@{/movimentos/salvar}" method="post" th:object="${movimento}">
+                                        
+                                        <input type="hidden" th:field="*{id}">
+
+                                        <div class="row">
+                                        
+                                            <div class="col-md-3">
+                                                <div class="mb-3">
+                                                    <label for="tipo" class="form-label">Tipo de Movimentação</label>
+                                                    <select th:field="*{tipo}" id="tipo" th:errorclass="is-invalid" class="form-select" autofocus>
+                                                        <option th:value="''">Selecione ...</option>
+                                                        <option th:value="'Entrada'">Entrada</option>
+                                                        <option th:value="'Saida'">Saída</option>
+                                                    </select>
+                                                    <span class="error" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="material" class="form-label">Material</label>
+                                                    <select th:field="*{material}" id="material" th:errorclass="is-invalid" class="form-select">
+                                                        <option th:value="''">Selecione ...</option>
+                                                        <option th:each="material : ${materiaisList}" th:value="${material.id}" th:text="${material.nome}"></option>
+                                                    </select>
+                                                    <span class="error" th:if="${#fields.hasErrors('material')}" th:errors="*{material}"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="mb-3">
+                                                    <label for="quantidade" class="form-label">Quantidade</label>
+                                                    <input type="number" id="quantidade" th:field="*{quantidade}" th:errorclass="is-invalid" class="form-control" placeholder="">
+                                                    <span class="error" th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="mb-3">
+                                                    <label for="notaFiscal" class="form-label">Nota Fiscal</label>
+                                                    <input type="text" id="notaFiscal" th:field="*{notaFiscal}" th:errorclass="is-invalid" class="form-control" placeholder="">
+                                                    <span class="error" th:if="${#fields.hasErrors('notaFiscal')}" th:errors="*{notaFiscal}"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="fornecedor" class="form-label">Fornecedor</label>
+                                                    <select th:field="*{fornecedor}" id="fornecedor" th:errorclass="is-invalid" class="form-select">
+                                                        <option th:value="''">Selecione ...</option>
+                                                        <option th:each="fornecedor : ${fornecedoresList}" th:value="${fornecedor.id}" th:text="${fornecedor.nome}"></option>
+                                                    </select>
+                                                    <span class="error" th:if="${#fields.hasErrors('fornecedor')}" th:errors="*{fornecedor}"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="mb-3">
+                                                    <label for="responsavel" class="form-label">Responsável</label>
+                                                    <input type="text" id="responsavel" th:field="*{responsavel}" th:errorclass="is-invalid" class="form-control" placeholder="">
+                                                    <span class="error" th:if="${#fields.hasErrors('responsavel')}" th:errors="*{responsavel}"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div>
+                                            <button type="submit" class="btn btn-primary w-md"> <i class="fas fa-save"></i> Salvar</button>
+                                            <button onclick="javascript:history.back(-1);" type="button" class="btn btn-secondary w-md">
+                                                <i class="fas fa-times"></i> Cancelar
+                                            </button>
+                                        </div>
+                                        
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+                    </div> <!-- end row -->
+
+    </th:block>
+
+    <th:block layout:fragment="pageJs">
+        <script th:src="@{/pages/movimentos.js}"></script>
+    </th:block>
+        
+
+</html>
