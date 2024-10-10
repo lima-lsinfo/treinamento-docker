@@ -49,6 +49,11 @@
   docker rm nome-do-container
   ```
 
+- **Remove todos os containers**
+  ```bash
+  docker rm -v -f $(docker ps -qa)
+  ```
+
 ### 3. **Inspecionar Containers**
 
 - **Acessar um container em execução**:
